@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
                 List list = new ArrayList<VKScope>();
                 list.add(VKScope.WALL);
                 list.add(VKScope.PHOTOS);
-                list.add(VKScope.MESSAGES);
+                //list.add(VKScope.MESSAGES); пока низзя
 
                 VK.login(this, list);
 
