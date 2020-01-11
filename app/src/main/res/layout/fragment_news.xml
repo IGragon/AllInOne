@@ -1,28 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/easternBlue">
 
-    <androidx.cardview.widget.CardView
-        style="@style/NewsCard"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/newsList"
+        app:layoutManager="LinearLayoutManager"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        card_view:cardCornerRadius="5dp" >
-
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="wrap_content"
-            android:layout_height="250dp"
-            tools:srcCompat="@tools:sample/backgrounds/scenic" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Текст новости"/>
-
-    </androidx.cardview.widget.CardView>
+        android:layout_height="match_parent" />
 </LinearLayout>

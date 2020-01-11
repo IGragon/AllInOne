@@ -3,6 +3,7 @@ package com.example.allinone;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -21,8 +22,16 @@ import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
-    Map<String, String> applications = new HashMap<String, String>(); // dictionary for tokens
+    Map<String, String> applications = new HashMap<>(); // dictionary for tokens
+    List<News> news = new ArrayList<>(); // list for news
 
+    public void create_some_news(){ // temp method to create news
+        news.add(new News("1st item then some text aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"));
+        news.add(new News("2nd item then some text aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"));
+        news.add(new News("3rd item then some text aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"));
+        news.add(new News("4th item then some text aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"));
+        news.add(new News("5th item then some text aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"));
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +49,16 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView bottomNav = findViewById(R.id.bottomNavigationView);
         bottomNav.setOnNavigationItemSelectedListener(navListener);
 
+
+        create_some_news(); // create some unreal news
+
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.newsList);
+        // создаем адаптер
+        DataAdapter adapter = new DataAdapter(this, news);
+        // устанавливаем для списка адаптер
+        System.out.println(adapter);
+        recyclerView.setAdapter(adapter);
+
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer,
                     new NewsFragment()).commit();
@@ -56,7 +75,6 @@ public class MainActivity extends AppCompatActivity {
                 //list.add(VKScope.MESSAGES); пока низзя
 
                 VK.login(this, list);
-
 
                 break;
             case R.id.buttonFacebook: // Facebook
