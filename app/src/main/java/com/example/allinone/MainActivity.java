@@ -6,11 +6,19 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.util.Log;
+import android.renderscript.ScriptGroup;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.allinone.databinding.ActivityAppsBinding;
+import com.example.allinone.databinding.ActivityMainBinding;
+import com.example.allinone.databinding.FragmentAppsBinding;
+import com.example.allinone.databinding.FragmentMessagesBinding;
+import com.example.allinone.databinding.FragmentNewsBinding;
+import com.example.allinone.databinding.FragmentProfileBinding;
+import com.example.allinone.databinding.NewsItemBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.vk.api.sdk.VK;
 import com.vk.api.sdk.auth.VKScope;
@@ -21,22 +29,27 @@ import java.util.List;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
+    // define all layout binding classes
+    // may remove some later
+    private ActivityAppsBinding activityAppsBinding;
+    private ActivityMainBinding activityMainBinding;
+    private FragmentAppsBinding fragmentAppsBinding;
+    private FragmentMessagesBinding fragmentMessagesBinding;
+    private FragmentNewsBinding fragmentNewsBinding; // да кто этот ваш layoutInflater??
+    private FragmentProfileBinding fragmentProfileBinding;
+    private NewsItemBinding newsItemBinding;
 
-    Map<String, String> applications = new HashMap<>(); // dictionary for tokens
-    List<News> news = new ArrayList<>(); // list for news
 
-    public void create_some_news(){ // temp method to create news
-        news.add(new News("1st item then some text aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"));
-        news.add(new News("2nd item then some text aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"));
-        news.add(new News("3rd item then some text aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"));
-        news.add(new News("4th item then some text aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"));
-        news.add(new News("5th item then some text aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"));
-    }
+    Map<String, String> applications = new HashMap<>(); // dictionary for token
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+
+        activityMainBinding = ActivityMainBinding.inflate(getLayoutInflater());
+        View view = activityMainBinding.getRoot();
+
+        setContentView(view);
 
         applications.put("vk", ""); // put keys for every app's token
 
@@ -48,16 +61,6 @@ public class MainActivity extends AppCompatActivity {
 
         BottomNavigationView bottomNav = findViewById(R.id.bottomNavigationView);
         bottomNav.setOnNavigationItemSelectedListener(navListener);
-
-
-        create_some_news(); // create some unreal news
-
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.newsList);
-        // создаем адаптер
-        DataAdapter adapter = new DataAdapter(this, news);
-        // устанавливаем для списка адаптер
-        System.out.println(adapter);
-        recyclerView.setAdapter(adapter);
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer,

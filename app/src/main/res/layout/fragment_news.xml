@@ -8,8 +8,11 @@
     android:background="@color/easternBlue">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/newsList"
-        app:layoutManager="LinearLayoutManager"
+        android:id="@+id/newsRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        app:layoutManager="LinearLayoutManager">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
 </LinearLayout>
