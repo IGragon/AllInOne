@@ -12,7 +12,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-import com.example.allinone.databinding.ActivityAppsBinding;
 import com.example.allinone.databinding.ActivityMainBinding;
 import com.example.allinone.databinding.FragmentAppsBinding;
 import com.example.allinone.databinding.FragmentMessagesBinding;
@@ -31,7 +30,6 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity {
     // define all layout binding classes
     // may remove some later
-    private ActivityAppsBinding activityAppsBinding;
     private ActivityMainBinding activityMainBinding;
     private FragmentAppsBinding fragmentAppsBinding;
     private FragmentMessagesBinding fragmentMessagesBinding;
@@ -75,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
                 List list = new ArrayList<VKScope>();
                 list.add(VKScope.WALL);
                 list.add(VKScope.PHOTOS);
+                list.add(VKScope.FRIENDS);
                 //list.add(VKScope.MESSAGES); пока низзя
 
                 VK.login(this, list);

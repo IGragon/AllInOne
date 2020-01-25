@@ -11,8 +11,7 @@
         android:id="@+id/newsRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layoutManager="LinearLayoutManager">
-
-    </androidx.recyclerview.widget.RecyclerView>
+        android:layout_marginTop="10dp"
+        app:layoutManager="LinearLayoutManager"/>
 
 </LinearLayout>
